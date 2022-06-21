@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>EnterHereSpot</defName>
+    <label>please enter here</label>
+    <description>Designates a spot where visitors entering the map should try to enter.</description>
+    <graphicData>
+      <texPath>Things/Building/Misc/PartySpot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    <statBases>
+      <WorkToBuild>0</WorkToBuild>
+    </statBases>
+    <thingClass>Building</thingClass>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <useHitPoints>False</useHitPoints>
+    <designationCategory>Misc</designationCategory>
+    <passability>Standable</passability>
+    <canOverlapZones>true</canOverlapZones>
+    <placeWorkers>
+      <li>EnterHere.PlaceWorker_NearEdge</li>
+    </placeWorkers>
+    <building>
+      <isInert>true</isInert>
+      <ai_chillDestination>false</ai_chillDestination>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+    </building>
+  </ThingDef>
+</Defs>

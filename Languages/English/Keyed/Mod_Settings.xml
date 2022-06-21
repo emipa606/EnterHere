@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <EH.Title>Select what types of visitors should try to spawn near a enter-spot</EH.Title>
+  <EH.Traders>Traders</EH.Traders>
+  <EH.Traders.Tooltip>All traders using the vanilla trading-logic</EH.Traders.Tooltip>
+  <EH.Visitors>Visitors</EH.Visitors>
+  <EH.Visitors.Tooltip>Visitor groups wanting to spend some time at the colony</EH.Visitors.Tooltip>
+  <EH.Travelers>Travelers</EH.Travelers>
+  <EH.Travelers.Tooltip>Traveler groups passing through your area</EH.Travelers.Tooltip>
+  <EH.MustPlaceNearEdge>Must be placed near the map edge</EH.MustPlaceNearEdge>
+</LanguageData>
