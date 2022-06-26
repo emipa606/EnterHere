@@ -5,7 +5,7 @@
 
 Makes visitors and caravans enter your map in an orderly fashion. 
 
-You can place down entering-spots on the edge of the map and any caravan or visitor will try to enter the map as close to a spot as possible.
+You can place down entering-spots on the edge of the map and any caravan or visitor will try to enter the map as close to a spot as possible. You will find these in the Misc-menu.
 
 Works as a good companion-mod for https://steamcommunity.com/sharedfiles/filedetails/?id=2813027453]Ask Before Enter
 
