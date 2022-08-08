@@ -7,6 +7,7 @@ namespace EnterHere;
 /// </summary>
 internal class EnterHereSettings : ModSettings
 {
+    public bool Colonists = true;
     public bool Traders = true;
     public bool Travelers = true;
     public bool Visitors = true;
@@ -20,5 +21,6 @@ internal class EnterHereSettings : ModSettings
         Scribe_Values.Look(ref Visitors, "Visitors", true);
         Scribe_Values.Look(ref Traders, "Traders", true);
         Scribe_Values.Look(ref Travelers, "Travelers", true);
+        Scribe_Values.Look(ref Colonists, "Colonists", true);
     }
 }

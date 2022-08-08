@@ -68,6 +68,8 @@ internal class EnterHereMod : Mod
             "EH.Visitors.Tooltip".Translate());
         listing_Standard.CheckboxLabeled("EH.Travelers".Translate(), ref EnterHereSettings.Travelers,
             "EH.Travelers.Tooltip".Translate());
+        listing_Standard.CheckboxLabeled("EH.Colonists".Translate(), ref EnterHereSettings.Colonists,
+            "EH.Colonists.Tooltip".Translate());
 
         listing_Standard.End();
     }
