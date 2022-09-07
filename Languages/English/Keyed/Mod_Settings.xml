@@ -9,5 +9,9 @@
   <EH.Travelers.Tooltip>Traveler groups passing through your area</EH.Travelers.Tooltip>
   <EH.Colonists>Colonists</EH.Colonists>
   <EH.Colonists.Tooltip>Colonists in a caravan returning to the map</EH.Colonists.Tooltip>
+  <EH.FriendlyRaids>Firendly Raids (Assistance)</EH.FriendlyRaids>
+  <EH.FriendlyRaids.Tooltip>Helping raids entering via map-edge</EH.FriendlyRaids.Tooltip>
+  <EH.EnemyRaids>Enemy Raids</EH.EnemyRaids>
+  <EH.EnemyRaids.Tooltip>Enemy raids entering via map-edge. NOTE: Depending on the use this can be abused, play nice!</EH.EnemyRaids.Tooltip>
   <EH.MustPlaceNearEdge>Must be placed near the map edge</EH.MustPlaceNearEdge>
 </LanguageData>

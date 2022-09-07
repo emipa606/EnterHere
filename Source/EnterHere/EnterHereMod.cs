@@ -70,6 +70,10 @@ internal class EnterHereMod : Mod
             "EH.Travelers.Tooltip".Translate());
         listing_Standard.CheckboxLabeled("EH.Colonists".Translate(), ref EnterHereSettings.Colonists,
             "EH.Colonists.Tooltip".Translate());
+        listing_Standard.CheckboxLabeled("EH.FriendlyRaids".Translate(), ref EnterHereSettings.FriendlyRaids,
+            "EH.FriendlyRaids.Tooltip".Translate());
+        listing_Standard.CheckboxLabeled("EH.EnemyRaids".Translate(), ref EnterHereSettings.EnemyRaids,
+            "EH.EnemyRaids.Tooltip".Translate());
 
         listing_Standard.End();
     }

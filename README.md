@@ -10,7 +10,8 @@ You can place down entering-spots on the edge of the map and any caravan or visi
 Works as a good companion-mod for https://steamcommunity.com/sharedfiles/filedetails/?id=2813027453]Ask Before Enter
 
 Supports most trader-types and also visitors from https://steamcommunity.com/sharedfiles/filedetails/?id=753498552]Hospitality
-There are also options if you want to disable the use of spots.
+Also applies to returning player caravans returning to the map.
+There are options if you want to disable the use of spots for some of the above pawn-types.
 
 Idea by: annabell lee
 
