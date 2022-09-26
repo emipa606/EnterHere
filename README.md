@@ -13,6 +13,8 @@ Supports most trader-types and also visitors from https://steamcommunity.com/sha
 Also applies to returning player caravans returning to the map.
 There are options if you want to disable the use of spots for some of the above pawn-types.
 
+Optionally you can turn on this for raids (friendly and hostile) as well, just dont abuse it too much ;)
+
 Idea by: annabell lee
 
 ![Image](https://i.imgur.com/O0IIlYj.png)

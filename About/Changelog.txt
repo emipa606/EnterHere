@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.3.4 - Portuguese translation added, thanks DvdFalaschi!
+
+
 1.3.3 - Added option for friendly and enemy raids, off by default
 
 
