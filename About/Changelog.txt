@@ -1,5 +1,9 @@
 # Changelog for EnterHere
 
+1.4.1 - Mod updated for 1.4 and passed autotests.
+Used DeepL to update translations for Portuguese
+
+
 1.3.4 - Portuguese translation added, thanks DvdFalaschi!
 
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Mlie;
+using UnityEngine;
 using Verse;
 
 namespace EnterHere;
@@ -10,6 +11,8 @@ internal class EnterHereMod : Mod
     ///     The instance of the enterHereSettings to be read by the mod
     /// </summary>
     public static EnterHereMod instance;
+
+    private static string currentVersion;
 
     /// <summary>
     ///     The private enterHereSettings
@@ -23,6 +26,8 @@ internal class EnterHereMod : Mod
     public EnterHereMod(ModContentPack content) : base(content)
     {
         instance = this;
+        currentVersion =
+            VersionFromManifest.GetVersionFromModMetaData(ModLister.GetActiveModWithIdentifier("Mlie.EnterHere"));
     }
 
     /// <summary>
@@ -74,6 +79,13 @@ internal class EnterHereMod : Mod
             "EH.FriendlyRaids.Tooltip".Translate());
         listing_Standard.CheckboxLabeled("EH.EnemyRaids".Translate(), ref EnterHereSettings.EnemyRaids,
             "EH.EnemyRaids.Tooltip".Translate());
+        if (currentVersion != null)
+        {
+            listing_Standard.Gap();
+            GUI.contentColor = Color.gray;
+            listing_Standard.Label("EH.CurrentVersion".Translate(currentVersion));
+            GUI.contentColor = Color.white;
+        }
 
         listing_Standard.End();
     }

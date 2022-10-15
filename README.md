@@ -15,6 +15,8 @@ There are options if you want to disable the use of spots for some of the above 
 
 Optionally you can turn on this for raids (friendly and hostile) as well, just dont abuse it too much ;)
 
+- Portuguese translation added, thanks DvdFalaschi!
+
 Idea by: annabell lee
 
 ![Image](https://i.imgur.com/O0IIlYj.png)
