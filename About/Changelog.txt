@@ -1,5 +1,9 @@
 # Changelog for EnterHere
 
+1.4.2 - Added exit-option to spots.
+Used DeepL to update translations for ChineseSimplified, French, German, Portuguese, Russian
+
+
 1.4.1 - Mod updated for 1.4 and passed autotests.
 Used DeepL to update translations for Portuguese
 

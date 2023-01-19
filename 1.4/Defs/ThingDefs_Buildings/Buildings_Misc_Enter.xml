@@ -3,7 +3,8 @@
   <ThingDef ParentName="BuildingBase">
     <defName>EnterHereSpot</defName>
     <label>please enter here</label>
-    <description>Designates a spot where visitors entering the map should try to enter.</description>
+    <thingClass>EnterHere.EnterSpot</thingClass>
+    <description>Designates a spot where visitors entering the map should try to enter or exit.</description>
     <graphicData>
       <texPath>Things/Building/Misc/PartySpot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -12,7 +13,6 @@
     <statBases>
       <WorkToBuild>0</WorkToBuild>
     </statBases>
-    <thingClass>Building</thingClass>
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <useHitPoints>False</useHitPoints>
     <designationCategory>Misc</designationCategory>

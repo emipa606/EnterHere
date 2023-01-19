@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -13,6 +14,12 @@ namespace EnterHere;
 public static class Main
 {
     internal static readonly List<Type> targets;
+
+    public static readonly Texture2D EnterOnlyTexture2D = ContentFinder<Texture2D>.Get("UI/EnterOnly");
+
+    public static readonly Texture2D ExitOnlyTexture2D = ContentFinder<Texture2D>.Get("UI/ExitOnly");
+
+    public static readonly Texture2D EnterAndExitTexture2D = ContentFinder<Texture2D>.Get("UI/EnterAndExit");
 
     static Main()
     {
@@ -34,59 +41,116 @@ public static class Main
 
     public static IntVec3 FindBestEnterSpot(Map map, IntVec3 startIntVec3)
     {
-        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"));
+        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))?.Where(building =>
+            building is EnterSpot
+            {
+                IsEnterance: true
+            });
 
-        if (!list.Any())
+        if (list == null || !list.Any())
         {
             return startIntVec3;
         }
 
-        var currentSpotPosition = list.RandomElement().Position;
-
-        bool CellValidator(IntVec3 edgeCell)
+        foreach (var spot in list.InRandomOrder())
         {
-            if (!edgeCell.Standable(map))
+            var currentSpotPosition = spot.Position;
+
+            bool CellValidator(IntVec3 edgeCell)
             {
-                return false;
+                if (!edgeCell.Standable(map))
+                {
+                    return false;
+                }
+
+                if (map.roofGrid.Roofed(edgeCell))
+                {
+                    return false;
+                }
+
+                if (!map.reachability.CanReachColony(edgeCell))
+                {
+                    return false;
+                }
+
+                if (!map.reachability.CanReach(edgeCell, currentSpotPosition, PathEndMode.OnCell,
+                        TraverseParms.For(TraverseMode.PassDoors)))
+                {
+                    return false;
+                }
+
+                if (!edgeCell.GetDistrict(map).TouchesMapEdge)
+                {
+                    return false;
+                }
+
+                return !edgeCell.Fogged(map);
             }
 
-            if (map.roofGrid.Roofed(edgeCell))
+            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+                    out var resultIntVec3))
             {
-                return false;
+                return resultIntVec3;
             }
-
-            if (!map.reachability.CanReachColony(edgeCell))
-            {
-                return false;
-            }
-
-            if (!map.reachability.CanReach(edgeCell, currentSpotPosition, PathEndMode.OnCell,
-                    TraverseParms.For(TraverseMode.PassDoors)))
-            {
-                return false;
-            }
-
-            if (!edgeCell.GetDistrict(map).TouchesMapEdge)
-            {
-                return false;
-            }
-
-            if (edgeCell.Fogged(map))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
-                out var resultIntVec3))
-        {
-            return resultIntVec3;
         }
 
         Log.Message(
-            $"[EnterHere]: Could not find a suitable edge-cell near Enter-spot at {currentSpotPosition}, defaulting to vanilla enter behaviour");
+            "[EnterHere]: Could not find a suitable edge-cell near an enter spot, defaulting to vanilla enter behaviour");
         return startIntVec3;
+    }
+
+
+    public static IntVec3 FindBestExitSpot(Map map, IntVec3 startingPoint, TraverseMode mode)
+    {
+        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))?.Where(building =>
+            building is EnterSpot
+            {
+                IsExit: true
+            });
+
+        if (list == null || !list.Any())
+        {
+            return IntVec3.Invalid;
+        }
+
+        foreach (var spot in list.InRandomOrder())
+        {
+            var currentSpotPosition = spot.Position;
+
+            bool CellValidator(IntVec3 edgeCell)
+            {
+                if (!edgeCell.Standable(map))
+                {
+                    return false;
+                }
+
+                if (map.roofGrid.Roofed(edgeCell))
+                {
+                    return false;
+                }
+
+                if (!map.reachability.CanReach(startingPoint, edgeCell, PathEndMode.OnCell, TraverseParms.For(mode)))
+                {
+                    return false;
+                }
+
+                if (!edgeCell.GetDistrict(map).TouchesMapEdge)
+                {
+                    return false;
+                }
+
+                return !edgeCell.Fogged(map);
+            }
+
+            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+                    out var resultIntVec3))
+            {
+                return resultIntVec3;
+            }
+        }
+
+        Log.Message(
+            "[EnterHere]: Could not find a suitable edge-cell near an exit spot, defaulting to vanilla exit behaviour");
+        return IntVec3.Invalid;
     }
 }
