@@ -21,6 +21,9 @@ public static class Main
 
     public static readonly Texture2D EnterAndExitTexture2D = ContentFinder<Texture2D>.Get("UI/EnterAndExit");
 
+    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache =
+        new Dictionary<Pawn, Tuple<int, IntVec3>>();
+
     static Main()
     {
         targets = new List<Type> { typeof(IncidentWorker_VisitorGroup) };
@@ -100,13 +103,18 @@ public static class Main
     }
 
 
-    public static IntVec3 FindBestExitSpot(Map map, IntVec3 startingPoint, TraverseMode mode)
+    public static IntVec3 FindBestExitSpot(Pawn pawn, IntVec3 startingPoint, TraverseMode mode)
     {
-        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))?.Where(building =>
-            building is EnterSpot
-            {
-                IsExit: true
-            });
+        var cachedSpot = checkExitCache(pawn);
+
+        if (cachedSpot != IntVec3.Invalid)
+        {
+            return cachedSpot;
+        }
+
+        var map = pawn.Map;
+        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))
+            ?.Where(building => building is EnterSpot { IsExit: true });
 
         if (list == null || !list.Any())
         {
@@ -129,7 +137,8 @@ public static class Main
                     return false;
                 }
 
-                if (!map.reachability.CanReach(startingPoint, edgeCell, PathEndMode.OnCell, TraverseParms.For(mode)))
+                if (!map.reachability.CanReach(startingPoint, edgeCell, PathEndMode.OnCell,
+                        TraverseParms.For(mode)))
                 {
                     return false;
                 }
@@ -142,15 +151,36 @@ public static class Main
                 return !edgeCell.Fogged(map);
             }
 
-            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+            if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
                     out var resultIntVec3))
             {
-                return resultIntVec3;
+                continue;
             }
+
+            ExitSpotCache[pawn] = new Tuple<int, IntVec3>(GenTicks.TicksGame, resultIntVec3);
+            return resultIntVec3;
         }
 
         Log.Message(
             "[EnterHere]: Could not find a suitable edge-cell near an exit spot, defaulting to vanilla exit behaviour");
         return IntVec3.Invalid;
+    }
+
+    private static IntVec3 checkExitCache(Pawn pawn)
+    {
+        if (!ExitSpotCache.ContainsKey(pawn))
+        {
+            return IntVec3.Invalid;
+        }
+
+        var cachedSpot = ExitSpotCache[pawn];
+        if (GenTicks.TickRareInterval * 2 < GenTicks.TicksGame - cachedSpot.Item1)
+        {
+            ExitSpotCache.Remove(pawn);
+            return IntVec3.Invalid;
+        }
+
+        ExitSpotCache[pawn] = new Tuple<int, IntVec3>(GenTicks.TicksGame, cachedSpot.Item2);
+        return ExitSpotCache[pawn].Item2;
     }
 }

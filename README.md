@@ -6,6 +6,8 @@
 Makes visitors and caravans enter your map in an orderly fashion. 
 
 You can place down entering-spots on the edge of the map and any caravan or visitor will try to enter the map as close to a spot as possible. You will find these in the Misc-menu.
+You can also toggle the spot to be an exit-spot or both enter and exit. 
+This will make pawns try to use these spots when exiting the map as well, except for the traveling pawn-group since they will exit the map on the opposite side that they entered.
 
 Works as a good companion-mod for https://steamcommunity.com/sharedfiles/filedetails/?id=2813027453]Ask Before Enter
 
@@ -38,5 +40,4 @@ https://ko-fi.com/G2G55DDYD]![Image](https://i.imgur.com/Utx6OIH.png)
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2824117092]Last updated 2023-01-19
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2824117092]Last updated 2023-01-21
