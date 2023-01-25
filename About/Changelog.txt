@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.4.4 - Better french translation and a typofix, thanks Neo5689
+
+
 1.4.3 - When exiting pawns will remember their last exit-spot for a while. This will fix caravans moving around between multiple exit-spots.
 
 
