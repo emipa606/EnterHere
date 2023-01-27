@@ -132,23 +132,18 @@ public static class Main
                     return false;
                 }
 
+                if (edgeCell.Fogged(map))
+                {
+                    return false;
+                }
+
                 if (map.roofGrid.Roofed(edgeCell))
                 {
                     return false;
                 }
 
-                if (!map.reachability.CanReach(startingPoint, edgeCell, PathEndMode.OnCell,
-                        TraverseParms.For(mode)))
-                {
-                    return false;
-                }
-
-                if (!edgeCell.GetDistrict(map).TouchesMapEdge)
-                {
-                    return false;
-                }
-
-                return !edgeCell.Fogged(map);
+                return edgeCell.GetDistrict(map).TouchesMapEdge &&
+                       pawn.CanReach(edgeCell, PathEndMode.OnCell, Danger.Deadly);
             }
 
             if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,

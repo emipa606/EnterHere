@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.4.5 - Exiting should work better with Locks and Hospitality now
+
+
 1.4.4 - Better french translation and a typofix, thanks Neo5689
 
 
