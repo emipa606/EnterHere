@@ -103,7 +103,7 @@ public static class Main
     }
 
 
-    public static IntVec3 FindBestExitSpot(Pawn pawn, IntVec3 startingPoint, TraverseMode mode)
+    public static IntVec3 FindBestExitSpot(Pawn pawn, TraverseMode mode, bool guests = false)
     {
         var cachedSpot = checkExitCache(pawn);
 
@@ -121,30 +121,49 @@ public static class Main
             return IntVec3.Invalid;
         }
 
+        Pawn alternatePawn = null;
+        if (guests)
+        {
+            alternatePawn = map.mapPawns.FreeColonists.OrderBy(colonist => colonist.Position.DistanceTo(pawn.Position))
+                .FirstOrDefault();
+            if (alternatePawn == null)
+            {
+                return IntVec3.Invalid;
+            }
+
+            Log.Message(
+                $"[EnterHere]: Hospitality guests, will use nearest colonist for pathfinding. ({alternatePawn})");
+        }
+
+        bool CellValidator(IntVec3 edgeCell)
+        {
+            if (!edgeCell.Standable(map))
+            {
+                return false;
+            }
+
+            if (edgeCell.Fogged(map))
+            {
+                return false;
+            }
+
+            if (map.roofGrid.Roofed(edgeCell))
+            {
+                return false;
+            }
+
+            if (!edgeCell.GetDistrict(map).TouchesMapEdge)
+            {
+                return false;
+            }
+
+            return alternatePawn?.CanReach(edgeCell, PathEndMode.OnCell, Danger.Deadly, mode: mode) ??
+                   pawn.CanReach(edgeCell, PathEndMode.OnCell, Danger.Deadly, mode: mode);
+        }
+
         foreach (var spot in list.InRandomOrder())
         {
             var currentSpotPosition = spot.Position;
-
-            bool CellValidator(IntVec3 edgeCell)
-            {
-                if (!edgeCell.Standable(map))
-                {
-                    return false;
-                }
-
-                if (edgeCell.Fogged(map))
-                {
-                    return false;
-                }
-
-                if (map.roofGrid.Roofed(edgeCell))
-                {
-                    return false;
-                }
-
-                return edgeCell.GetDistrict(map).TouchesMapEdge &&
-                       pawn.CanReach(edgeCell, PathEndMode.OnCell, Danger.Deadly);
-            }
 
             if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
                     out var resultIntVec3))

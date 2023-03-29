@@ -19,7 +19,7 @@ public static class TransitionAction_EnsureHaveNearbyExitDestination_DoAction
         var target = (LordToil_Travel)trans.target;
         var searcher = target.lord.ownedPawns.RandomElement();
 
-        var exitLocation = Main.FindBestExitSpot(searcher, searcher.Position, TraverseMode.ByPawn);
+        var exitLocation = Main.FindBestExitSpot(searcher, TraverseMode.ByPawn, true);
 
         if (exitLocation == IntVec3.Invalid)
         {

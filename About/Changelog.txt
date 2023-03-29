@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.4.7 - Fixed hospitality patch to work through doors and locks as well
+
+
 1.4.6 - Added support for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=753498552]Hospitality[/url]
 
 

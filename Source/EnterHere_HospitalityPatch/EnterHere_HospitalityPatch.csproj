@@ -1,33 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<OutputPath>..\..\Hospitality\1.4\Assemblies</OutputPath>
-		<TargetFramework>net48</TargetFramework>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-		<DebugType>None</DebugType>
-		<LangVersion>latest</LangVersion>
-		<FileVersion>1.4.6</FileVersion>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="Krafs.Rimworld.Ref">
-			<Version>*</Version>
-			<ExcludeAssets>runtime</ExcludeAssets>
-			<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Lib.Harmony">
-			<Version>*</Version>
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
-	  <ProjectReference Include="..\EnterHere\EnterHere.csproj">
-		  <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
-		  <CopyLocal>False</CopyLocal>
-		  <Private>false</Private>
-		  <ExcludeAssets>all</ExcludeAssets>
-	  </ProjectReference>
-		<Reference Include="Hospitality">
-			<HintPath>..\..\..\..\..\..\workshop\content\294100\753498552\1.4\Assemblies\Hospitality.dll</HintPath>
-			<CopyLocal>False</CopyLocal>
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
+  <PropertyGroup>
+    <OutputPath>..\..\Hospitality\1.4\Assemblies</OutputPath>
+    <TargetFramework>net48</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <DebugType>None</DebugType>
+    <LangVersion>latest</LangVersion>
+    <FileVersion>1.4.7</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>*</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony">
+      <Version>*</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <ProjectReference Include="..\EnterHere\EnterHere.csproj">
+      <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+      <CopyLocal>False</CopyLocal>
+      <Private>false</Private>
+      <ExcludeAssets>all</ExcludeAssets>
+    </ProjectReference>
+    <Reference Include="Hospitality">
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\753498552\1.4\Assemblies\Hospitality.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
 </Project>

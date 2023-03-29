@@ -46,7 +46,7 @@ public static class RCellFinder_TryFindExitSpot
             }
         }
 
-        var exitLocation = Main.FindBestExitSpot(pawn, pawn.Position, mode);
+        var exitLocation = Main.FindBestExitSpot(pawn, mode);
 
         if (exitLocation == IntVec3.Invalid)
         {
