@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnterHere", "EnterHere\EnterHere.csproj", "{3E06096B-8065-4F25-805B-71CBB5E9C42F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnterHere_HospitalityPatch", "EnterHere_HospitalityPatch\EnterHere_HospitalityPatch.csproj", "{2A68C70D-8027-4920-B06A-25EC4F39E8B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3E06096B-8065-4F25-805B-71CBB5E9C42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E06096B-8065-4F25-805B-71CBB5E9C42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E06096B-8065-4F25-805B-71CBB5E9C42F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A68C70D-8027-4920-B06A-25EC4F39E8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A68C70D-8027-4920-B06A-25EC4F39E8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A68C70D-8027-4920-B06A-25EC4F39E8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A68C70D-8027-4920-B06A-25EC4F39E8B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

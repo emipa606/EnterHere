@@ -5,7 +5,7 @@ namespace EnterHere;
 /// <summary>
 ///     Definition of the enterHereSettings for the mod
 /// </summary>
-internal class EnterHereSettings : ModSettings
+public class EnterHereSettings : ModSettings
 {
     public bool Colonists = true;
     public bool EnemyRaids;

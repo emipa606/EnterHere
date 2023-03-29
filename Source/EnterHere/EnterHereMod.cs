@@ -5,7 +5,7 @@ using Verse;
 namespace EnterHere;
 
 [StaticConstructorOnStartup]
-internal class EnterHereMod : Mod
+public class EnterHereMod : Mod
 {
     /// <summary>
     ///     The instance of the enterHereSettings to be read by the mod
@@ -17,7 +17,7 @@ internal class EnterHereMod : Mod
     /// <summary>
     ///     The private enterHereSettings
     /// </summary>
-    private EnterHereSettings enterHereSettings;
+    public readonly EnterHereSettings EnterHereSettings;
 
     /// <summary>
     ///     Constructor
@@ -27,24 +27,8 @@ internal class EnterHereMod : Mod
     {
         instance = this;
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(ModLister.GetActiveModWithIdentifier("Mlie.EnterHere"));
-    }
-
-    /// <summary>
-    ///     The instance-enterHereSettings for the mod
-    /// </summary>
-    internal EnterHereSettings EnterHereSettings
-    {
-        get
-        {
-            if (enterHereSettings == null)
-            {
-                enterHereSettings = GetSettings<EnterHereSettings>();
-            }
-
-            return enterHereSettings;
-        }
-        set => enterHereSettings = value;
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
+        EnterHereSettings = GetSettings<EnterHereSettings>();
     }
 
     /// <summary>
