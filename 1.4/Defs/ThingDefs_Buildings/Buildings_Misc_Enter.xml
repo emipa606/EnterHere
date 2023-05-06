@@ -18,11 +18,15 @@
     <designationCategory>Misc</designationCategory>
     <passability>Standable</passability>
     <canOverlapZones>true</canOverlapZones>
+    <uiOrder>2000</uiOrder>
     <placeWorkers>
       <li>EnterHere.PlaceWorker_NearEdge</li>
     </placeWorkers>
     <building>
       <isInert>true</isInert>
+      <sowTag>SupportPlantsOnly</sowTag>
+      <canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+      <wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <ai_chillDestination>false</ai_chillDestination>
       <ai_neverTrashThis>true</ai_neverTrashThis>
