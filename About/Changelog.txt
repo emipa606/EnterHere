@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.4.9 - Updated russian translation by Reiquard
+
+
 1.4.8 - Spots should no longer clear the cell when placing, will now act as vanilla spots
 
 
