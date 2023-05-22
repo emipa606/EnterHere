@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.4.10 - Nicer gizmo icons, thanks to Soul!
+
+
 1.4.9 - Updated russian translation by Reiquard
 
 
