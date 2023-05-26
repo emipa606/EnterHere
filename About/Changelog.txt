@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.4.11 - Corrected icon-textures
+
+
 1.4.10 - Nicer gizmo icons, thanks to Soul!
 
 
