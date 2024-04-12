@@ -26,7 +26,7 @@ public static class Main
 
     static Main()
     {
-        targets = new List<Type> { typeof(IncidentWorker_VisitorGroup) };
+        targets = [typeof(IncidentWorker_VisitorGroup)];
 
         if (ModLister.GetActiveModWithIdentifier("Orion.Hospitality") != null)
         {
@@ -59,6 +59,14 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
+            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+                    out var resultIntVec3))
+            {
+                return resultIntVec3;
+            }
+
+            continue;
+
             bool CellValidator(IntVec3 edgeCell)
             {
                 if (!edgeCell.Standable(map))
@@ -88,12 +96,6 @@ public static class Main
                 }
 
                 return !edgeCell.Fogged(map);
-            }
-
-            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
-                    out var resultIntVec3))
-            {
-                return resultIntVec3;
             }
         }
 
@@ -135,6 +137,24 @@ public static class Main
                 $"[EnterHere]: Hospitality guests, will use nearest colonist for pathfinding. ({alternatePawn})");
         }
 
+        foreach (var spot in list.InRandomOrder())
+        {
+            var currentSpotPosition = spot.Position;
+
+            if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+                    out var resultIntVec3))
+            {
+                continue;
+            }
+
+            ExitSpotCache[pawn] = new Tuple<int, IntVec3>(GenTicks.TicksGame, resultIntVec3);
+            return resultIntVec3;
+        }
+
+        Log.Message(
+            "[EnterHere]: Could not find a suitable edge-cell near an exit spot, defaulting to vanilla exit behaviour");
+        return IntVec3.Invalid;
+
         bool CellValidator(IntVec3 edgeCell)
         {
             if (!edgeCell.Standable(map))
@@ -160,34 +180,15 @@ public static class Main
             return alternatePawn?.CanReach(edgeCell, PathEndMode.OnCell, Danger.Deadly, mode: mode) ??
                    pawn.CanReach(edgeCell, PathEndMode.OnCell, Danger.Deadly, mode: mode);
         }
-
-        foreach (var spot in list.InRandomOrder())
-        {
-            var currentSpotPosition = spot.Position;
-
-            if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
-                    out var resultIntVec3))
-            {
-                continue;
-            }
-
-            ExitSpotCache[pawn] = new Tuple<int, IntVec3>(GenTicks.TicksGame, resultIntVec3);
-            return resultIntVec3;
-        }
-
-        Log.Message(
-            "[EnterHere]: Could not find a suitable edge-cell near an exit spot, defaulting to vanilla exit behaviour");
-        return IntVec3.Invalid;
     }
 
     private static IntVec3 checkExitCache(Pawn pawn)
     {
-        if (!ExitSpotCache.ContainsKey(pawn))
+        if (!ExitSpotCache.TryGetValue(pawn, out var cachedSpot))
         {
             return IntVec3.Invalid;
         }
 
-        var cachedSpot = ExitSpotCache[pawn];
         if (GenTicks.TickRareInterval * 2 < GenTicks.TicksGame - cachedSpot.Item1)
         {
             ExitSpotCache.Remove(pawn);

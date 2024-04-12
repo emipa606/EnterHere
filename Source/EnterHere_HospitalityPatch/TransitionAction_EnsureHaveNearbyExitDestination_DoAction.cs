@@ -6,7 +6,8 @@ using Verse.AI.Group;
 
 namespace EnterHere_HospitalityPatch;
 
-[HarmonyPatch(typeof(TransitionAction_EnsureHaveNearbyExitDestination), "DoAction")]
+[HarmonyPatch(typeof(TransitionAction_EnsureHaveNearbyExitDestination),
+    nameof(TransitionAction_EnsureHaveNearbyExitDestination.DoAction))]
 public static class TransitionAction_EnsureHaveNearbyExitDestination_DoAction
 {
     public static void Postfix(ref Transition trans)

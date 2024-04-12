@@ -12,8 +12,8 @@ public static class RCellFinder_TryFindExitSpot
 {
     private static IEnumerable<MethodBase> TargetMethods()
     {
-        yield return typeof(RCellFinder).GetMethod("TryFindBestExitSpot");
-        yield return typeof(RCellFinder).GetMethod("TryFindRandomExitSpot");
+        yield return typeof(RCellFinder).GetMethod(nameof(RCellFinder.TryFindBestExitSpot));
+        yield return typeof(RCellFinder).GetMethod(nameof(RCellFinder.TryFindRandomExitSpot));
     }
 
     public static bool Prefix(Pawn pawn, ref IntVec3 spot, TraverseMode mode, ref bool __result)
