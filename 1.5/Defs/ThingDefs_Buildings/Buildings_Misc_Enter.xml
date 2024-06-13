@@ -30,6 +30,8 @@
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <ai_chillDestination>false</ai_chillDestination>
       <ai_neverTrashThis>true</ai_neverTrashThis>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
     </building>
   </ThingDef>
 </Defs>
