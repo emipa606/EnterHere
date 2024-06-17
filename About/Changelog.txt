@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.5.2 - Leaving caravans should behave better
+
+
 1.5.1 - Outgoing caravans will now use the exit spot (if selected). Spot does no longer expand the home area.
 
 

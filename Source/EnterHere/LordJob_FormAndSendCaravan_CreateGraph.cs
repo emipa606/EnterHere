@@ -4,10 +4,10 @@ using Verse;
 
 namespace EnterHere;
 
-[HarmonyPatch(typeof(LordToil_PrepareCaravan_Leave), nameof(LordToil_PrepareCaravan_Leave.UpdateAllDuties))]
-public static class LordToil_PrepareCaravan_Leave_UpdateAllDuties
+[HarmonyPatch(typeof(LordJob_FormAndSendCaravan), nameof(LordJob_FormAndSendCaravan.CreateGraph))]
+public static class LordJob_FormAndSendCaravan_CreateGraph
 {
-    public static void Prefix(ref IntVec3 ___exitSpot, LordToil_PrepareCaravan_Leave __instance)
+    public static void Prefix(ref IntVec3 ___exitSpot, LordJob_FormAndSendCaravan __instance)
     {
         if (!EnterHereMod.instance.EnterHereSettings.Colonists)
         {
