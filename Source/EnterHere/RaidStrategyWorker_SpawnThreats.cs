@@ -12,14 +12,16 @@ public static class RaidStrategyWorker_SpawnThreats
     private static IEnumerable<MethodBase> TargetMethods()
     {
         yield return AccessTools.Method(typeof(RaidStrategyWorker), nameof(RaidStrategyWorker.SpawnThreats));
+
         foreach (var subclass in typeof(RaidStrategyWorker).AllSubclasses())
         {
-            if (subclass.GetMethod("SpawnThreats") == null)
+            var subMethod = AccessTools.Method(subclass, "SpawnThreats");
+            if (subMethod == null)
             {
                 continue;
             }
 
-            yield return AccessTools.Method(subclass, "SpawnThreats");
+            yield return subMethod;
         }
     }
 
