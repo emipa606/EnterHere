@@ -13,6 +13,7 @@ public static class IncidentWorker_EntitySwarm_GenerateEntities
     {
         if (!ModsConfig.AnomalyActive)
         {
+            yield return AccessTools.Method(typeof(IncidentWorker_EntitySwarm_GenerateEntities), "Dummy");
             yield break;
         }
 
@@ -38,5 +39,10 @@ public static class IncidentWorker_EntitySwarm_GenerateEntities
         }
 
         parms.spawnCenter = Main.FindBestEnterSpot((Map)parms.target, parms.spawnCenter);
+    }
+
+    private static void Dummy(IncidentParms parms)
+    {
+        // Dummy method to force Harmony to create a patch class
     }
 }

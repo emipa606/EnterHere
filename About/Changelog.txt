@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.5.4 - Fixed the anomaly-patches when anomaly isnt loaded
+
+
 1.5.3 - The enemy-raid setting should now also affect Anomaly entity incidents
 
 
