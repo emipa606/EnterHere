@@ -11,7 +11,7 @@ This will make pawns try to use these spots when exiting the map as well, except
 Works as a good companion-mod for [Ask Before Enter](https://steamcommunity.com/sharedfiles/filedetails/?id=2813027453)
 
 Supports most trader-types and also visitors from [Hospitality](https://steamcommunity.com/sharedfiles/filedetails/?id=753498552)
-Also applies to returning player caravans returning to the map.
+Also applies to player caravans leaving and returning to the map as well as vehicle caravans from [Vehicle Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=3014915404).
 There are options if you want to disable the use of spots for some of the above pawn-types.
 
 Optionally you can turn on this for raids (friendly and hostile) as well, just dont abuse it too much ;)

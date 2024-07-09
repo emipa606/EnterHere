@@ -105,6 +105,42 @@ public static class Main
     }
 
 
+    public static IntVec3 FindBestExitSpot(Map map)
+    {
+        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))
+            ?.Where(building => building is EnterSpot { IsExit: true });
+
+        if (list == null || !list.Any())
+        {
+            return IntVec3.Invalid;
+        }
+
+        return list.InRandomOrder().Select(spot =>
+        {
+            var currentSpotPosition = spot.Position;
+
+            return CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+                out var resultIntVec3)
+                ? resultIntVec3
+                : IntVec3.Invalid;
+
+            bool CellValidator(IntVec3 edgeCell)
+            {
+                if (!edgeCell.Standable(map))
+                {
+                    return false;
+                }
+
+                if (edgeCell.Fogged(map))
+                {
+                    return false;
+                }
+
+                return !map.roofGrid.Roofed(edgeCell) && edgeCell.GetDistrict(map).TouchesMapEdge;
+            }
+        }).FirstOrDefault(cell => cell != IntVec3.Invalid);
+    }
+
     public static IntVec3 FindBestExitSpot(Pawn pawn, TraverseMode mode, bool guests = false)
     {
         var cachedSpot = checkExitCache(pawn);

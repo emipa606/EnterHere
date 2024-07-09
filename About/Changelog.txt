@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.5.6 - Vehicle-caravans should now leave and enter the map correctly using the enter/exit spots
+
+
 1.5.5 - Added support for Vehicle Caravans
 
 
