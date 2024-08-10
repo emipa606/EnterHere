@@ -15,7 +15,7 @@ public static class RaidStrategyWorker_SpawnThreats
 
         foreach (var subclass in typeof(RaidStrategyWorker).AllSubclasses())
         {
-            var subMethod = AccessTools.Method(subclass, "SpawnThreats");
+            var subMethod = AccessTools.DeclaredMethod(subclass, "SpawnThreats");
             if (subMethod == null)
             {
                 continue;

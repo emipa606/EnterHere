@@ -9,14 +9,13 @@ namespace EnterHere;
 [HarmonyPatch]
 public static class EnterMapUtilityVehicles_FindNearEdgeCell
 {
+    private static bool Prepare()
+    {
+        return ModLister.GetActiveModWithIdentifier("SmashPhil.VehicleFramework", true) != null;
+    }
+
     private static IEnumerable<MethodBase> TargetMethods()
     {
-        yield return AccessTools.Method(typeof(EnterMapUtilityVehicles_FindNearEdgeCell), nameof(Dummy));
-        if (ModLister.GetActiveModWithIdentifier("SmashPhil.VehicleFramework", true) == null)
-        {
-            yield break;
-        }
-
         yield return AccessTools.Method("Vehicles.EnterMapUtilityVehicles:FindNearEdgeCell");
     }
 
@@ -35,10 +34,5 @@ public static class EnterMapUtilityVehicles_FindNearEdgeCell
         }
 
         extraCellValidator = cell => cell.DistanceTo(exitLocation) < 10;
-    }
-
-    public static void Dummy(Predicate<IntVec3> extraCellValidator, Map map)
-    {
-        // Dummy method to force Harmony to create a patch class
     }
 }

@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.5.7 - No duplicate patching, thanks Bradson! Also uses harmony Prepare correctly.
+
+
 1.5.6 - Vehicle-caravans should now leave and enter the map correctly using the enter/exit spots
 
 

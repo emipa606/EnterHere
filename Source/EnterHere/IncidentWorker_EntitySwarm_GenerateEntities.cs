@@ -9,14 +9,13 @@ namespace EnterHere;
 [HarmonyPatch]
 public static class IncidentWorker_EntitySwarm_GenerateEntities
 {
+    private static bool Prepare()
+    {
+        return ModsConfig.AnomalyActive;
+    }
+
     private static IEnumerable<MethodBase> TargetMethods()
     {
-        if (!ModsConfig.AnomalyActive)
-        {
-            yield return AccessTools.Method(typeof(IncidentWorker_EntitySwarm_GenerateEntities), "Dummy");
-            yield break;
-        }
-
         yield return AccessTools.Method(typeof(IncidentWorker_EntitySwarm), "GenerateEntities");
         foreach (var subclass in typeof(IncidentWorker_EntitySwarm).AllSubclasses())
         {
@@ -39,10 +38,5 @@ public static class IncidentWorker_EntitySwarm_GenerateEntities
         }
 
         parms.spawnCenter = Main.FindBestEnterSpot((Map)parms.target, parms.spawnCenter);
-    }
-
-    private static void Dummy(IncidentParms parms)
-    {
-        // Dummy method to force Harmony to create a patch class
     }
 }
