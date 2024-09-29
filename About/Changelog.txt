@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.5.8 - Enter-spots should now be placeable on any terrain affordance, like water
+
+
 1.5.7 - No duplicate patching, thanks Bradson! Also uses harmony Prepare correctly.
 
 

@@ -21,6 +21,7 @@
     <placeWorkers>
       <li>EnterHere.PlaceWorker_NearEdge</li>
     </placeWorkers>
+    <terrainAffordanceNeeded Inherit="False" />
     <building>
       <isInert>true</isInert>
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
