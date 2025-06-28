@@ -11,7 +11,7 @@ public static class IncidentWorker_VisitorGroup_TryExecuteWorker
 {
     private static IEnumerable<MethodBase> TargetMethods()
     {
-        foreach (var visitorTypes in Main.targets)
+        foreach (var visitorTypes in Main.Targets)
         {
             yield return AccessTools.Method(visitorTypes, "TryExecuteWorker");
         }
@@ -20,7 +20,7 @@ public static class IncidentWorker_VisitorGroup_TryExecuteWorker
     [HarmonyPriority(Priority.Low)]
     public static void Prefix(ref IncidentParms parms)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Visitors)
+        if (!EnterHereMod.Instance.EnterHereSettings.Visitors)
         {
             return;
         }

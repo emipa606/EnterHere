@@ -9,7 +9,7 @@ public static class LordJob_FormAndSendCaravan_CreateGraph
 {
     public static void Prefix(ref IntVec3 ___exitSpot, LordJob_FormAndSendCaravan __instance)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Colonists)
+        if (!EnterHereMod.Instance.EnterHereSettings.Colonists)
         {
             return;
         }

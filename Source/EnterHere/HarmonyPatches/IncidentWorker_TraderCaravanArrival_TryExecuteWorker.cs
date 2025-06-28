@@ -10,7 +10,7 @@ public static class IncidentWorker_TraderCaravanArrival_TryExecuteWorker
     [HarmonyPriority(Priority.Low)]
     public static void Prefix(ref IncidentParms parms)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Traders)
+        if (!EnterHereMod.Instance.EnterHereSettings.Traders)
         {
             return;
         }

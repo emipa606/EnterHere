@@ -10,7 +10,7 @@ public static class IncidentWorker_TravelerGroup_TryExecuteWorker
     [HarmonyPriority(Priority.Low)]
     public static void Prefix(ref IncidentParms parms)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Travelers)
+        if (!EnterHereMod.Instance.EnterHereSettings.Travelers)
         {
             return;
         }

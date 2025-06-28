@@ -9,7 +9,7 @@ public static class PawnsArrivalModeWorker_EdgeWalkIn_Arrive
 {
     public static void Prefix(ref IncidentParms parms)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.EnemyRaids || !ModsConfig.AnomalyActive ||
+        if (!EnterHereMod.Instance.EnterHereSettings.EnemyRaids || !ModsConfig.AnomalyActive ||
             parms.faction != Faction.OfEntities)
         {
             return;

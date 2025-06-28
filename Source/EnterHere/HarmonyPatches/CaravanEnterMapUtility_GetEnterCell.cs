@@ -10,7 +10,7 @@ public static class CaravanEnterMapUtility_GetEnterCell
 {
     public static bool Prefix(Caravan caravan, Map map, ref IntVec3 __result)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Colonists)
+        if (!EnterHereMod.Instance.EnterHereSettings.Colonists)
         {
             return true;
         }

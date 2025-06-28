@@ -23,26 +23,28 @@ public static class RCellFinder_TryFindExitSpot
             return true;
         }
 
-        if (pawn.Faction.HostileTo(Faction.OfPlayerSilentFail) && !EnterHereMod.instance.EnterHereSettings.EnemyRaids)
+        if (pawn.Faction.HostileTo(Faction.OfPlayerSilentFail) && !EnterHereMod.Instance.EnterHereSettings.EnemyRaids)
         {
             return true;
         }
 
-        if (pawn.IsColonist && !EnterHereMod.instance.EnterHereSettings.Colonists)
+        switch (pawn.IsColonist)
         {
-            return true;
-        }
-
-        if (!pawn.IsColonist)
-        {
-            var pawnLord = pawn.GetLord();
-            switch (pawnLord?.LordJob)
+            case true when !EnterHereMod.Instance.EnterHereSettings.Colonists:
+                return true;
+            case false:
             {
-                case LordJob_TravelAndExit:
-                case LordJob_VisitColony when !EnterHereMod.instance.EnterHereSettings.Visitors:
-                case LordJob_TradeWithColony when !EnterHereMod.instance.EnterHereSettings.Traders:
-                case LordJob_AssistColony when !EnterHereMod.instance.EnterHereSettings.FriendlyRaids:
-                    return true;
+                var pawnLord = pawn.GetLord();
+                switch (pawnLord?.LordJob)
+                {
+                    case LordJob_TravelAndExit:
+                    case LordJob_VisitColony when !EnterHereMod.Instance.EnterHereSettings.Visitors:
+                    case LordJob_TradeWithColony when !EnterHereMod.Instance.EnterHereSettings.Traders:
+                    case LordJob_AssistColony when !EnterHereMod.Instance.EnterHereSettings.FriendlyRaids:
+                        return true;
+                }
+
+                break;
             }
         }
 

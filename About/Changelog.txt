@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.6.0 - Updated to 1.6
+
+
 1.5.8 - Enter-spots should now be placeable on any terrain affordance, like water
 
 

@@ -33,9 +33,9 @@ public static class RaidStrategyWorker_SpawnThreats
             return;
         }
 
-        if (EnterHereMod.instance.EnterHereSettings.FriendlyRaids &&
+        if (EnterHereMod.Instance.EnterHereSettings.FriendlyRaids &&
             parms.faction?.AllyOrNeutralTo(Faction.OfPlayerSilentFail) == true ||
-            EnterHereMod.instance.EnterHereSettings.EnemyRaids &&
+            EnterHereMod.Instance.EnterHereSettings.EnemyRaids &&
             parms.faction?.HostileTo(Faction.OfPlayerSilentFail) == true)
         {
             parms.spawnCenter = Main.FindBestEnterSpot((Map)parms.target, parms.spawnCenter);

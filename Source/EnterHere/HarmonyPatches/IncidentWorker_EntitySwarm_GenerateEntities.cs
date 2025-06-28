@@ -32,7 +32,7 @@ public static class IncidentWorker_EntitySwarm_GenerateEntities
     [HarmonyPriority(Priority.Low)]
     public static void Postfix(ref IncidentParms parms)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.EnemyRaids)
+        if (!EnterHereMod.Instance.EnterHereSettings.EnemyRaids)
         {
             return;
         }

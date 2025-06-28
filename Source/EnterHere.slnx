@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="EnterHere/EnterHere.csproj" />
+  <Project Path="EnterHere_HospitalityPatch/EnterHere_HospitalityPatch.csproj" />
+</Solution>

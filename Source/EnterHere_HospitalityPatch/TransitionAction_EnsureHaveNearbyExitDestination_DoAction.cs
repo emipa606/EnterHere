@@ -12,7 +12,7 @@ public static class TransitionAction_EnsureHaveNearbyExitDestination_DoAction
 {
     public static void Postfix(ref Transition trans)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Visitors)
+        if (!EnterHereMod.Instance.EnterHereSettings.Visitors)
         {
             return;
         }

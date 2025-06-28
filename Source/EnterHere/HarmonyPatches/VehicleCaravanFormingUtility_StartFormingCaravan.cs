@@ -22,7 +22,7 @@ public static class VehicleCaravanFormingUtility_StartFormingCaravan
 
     public static void Prefix(ref IntVec3 exitSpot, List<Pawn> pawns)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Colonists)
+        if (!EnterHereMod.Instance.EnterHereSettings.Colonists)
         {
             return;
         }
@@ -46,20 +46,20 @@ public static class VehicleCaravanFormingUtility_StartFormingCaravan
             return;
         }
 
-        if (Validator(exitLocation))
+        if (validator(exitLocation))
         {
             exitSpot = exitLocation;
             return;
         }
 
-        if (CellFinder.TryFindRandomCellNear(exitLocation, map, 10, Validator, out exitLocation))
+        if (CellFinder.TryFindRandomCellNear(exitLocation, map, 10, validator, out exitLocation))
         {
             exitSpot = exitLocation;
         }
 
         return;
 
-        bool Validator(IntVec3 intVec3)
+        bool validator(IntVec3 intVec3)
         {
             return (bool)validVehicleExitSpotMethod.Invoke(null, [intVec3, vehiclePawn, map]);
         }

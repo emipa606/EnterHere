@@ -13,7 +13,7 @@ namespace EnterHere;
 [StaticConstructorOnStartup]
 public static class Main
 {
-    internal static readonly List<Type> targets;
+    internal static readonly List<Type> Targets;
 
     public static readonly Texture2D EnterOnlyTexture2D = ContentFinder<Texture2D>.Get("UI/EnterOnly");
 
@@ -21,19 +21,18 @@ public static class Main
 
     public static readonly Texture2D EnterAndExitTexture2D = ContentFinder<Texture2D>.Get("UI/EnterAndExit");
 
-    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache =
-        new Dictionary<Pawn, Tuple<int, IntVec3>>();
+    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache = new();
 
     static Main()
     {
-        targets = [typeof(IncidentWorker_VisitorGroup)];
+        Targets = [typeof(IncidentWorker_VisitorGroup)];
 
-        if (ModLister.GetActiveModWithIdentifier("Orion.Hospitality") != null)
+        if (ModLister.GetActiveModWithIdentifier("Orion.Hospitality", true) != null)
         {
             var foundType = AccessTools.TypeByName("Hospitality.IncidentWorker_VisitorGroup");
             if (foundType != null)
             {
-                targets.Add(foundType);
+                Targets.Add(foundType);
 
                 Log.Message("[EnterHere]: Hospitality loaded, patching its IncidentWorker_VisitorGroup.");
             }
@@ -47,8 +46,8 @@ public static class Main
         var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))?.Where(building =>
             building is EnterSpot
             {
-                IsEnterance: true
-            });
+                IsEntrance: true
+            }).ToArray();
 
         if (list == null || !list.Any())
         {
@@ -59,7 +58,7 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
-            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, cellValidator,
                     out var resultIntVec3))
             {
                 return resultIntVec3;
@@ -67,7 +66,7 @@ public static class Main
 
             continue;
 
-            bool CellValidator(IntVec3 edgeCell)
+            bool cellValidator(IntVec3 edgeCell)
             {
                 if (!edgeCell.Standable(map))
                 {
@@ -108,7 +107,7 @@ public static class Main
     public static IntVec3 FindBestExitSpot(Map map)
     {
         var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))
-            ?.Where(building => building is EnterSpot { IsExit: true });
+            ?.Where(building => building is EnterSpot { IsExit: true }).ToArray();
 
         if (list == null || !list.Any())
         {
@@ -119,12 +118,12 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
-            return CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+            return CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, cellValidator,
                 out var resultIntVec3)
                 ? resultIntVec3
                 : IntVec3.Invalid;
 
-            bool CellValidator(IntVec3 edgeCell)
+            bool cellValidator(IntVec3 edgeCell)
             {
                 if (!edgeCell.Standable(map))
                 {
@@ -152,7 +151,7 @@ public static class Main
 
         var map = pawn.Map;
         var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))
-            ?.Where(building => building is EnterSpot { IsExit: true });
+            ?.Where(building => building is EnterSpot { IsExit: true }).ToArray();
 
         if (list == null || !list.Any())
         {
@@ -177,7 +176,7 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
-            if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, CellValidator,
+            if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, cellValidator,
                     out var resultIntVec3))
             {
                 continue;
@@ -191,7 +190,7 @@ public static class Main
             "[EnterHere]: Could not find a suitable edge-cell near an exit spot, defaulting to vanilla exit behaviour");
         return IntVec3.Invalid;
 
-        bool CellValidator(IntVec3 edgeCell)
+        bool cellValidator(IntVec3 edgeCell)
         {
             if (!edgeCell.Standable(map))
             {

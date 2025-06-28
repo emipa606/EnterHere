@@ -8,7 +8,7 @@ public class EnterSpot : Building
     private int spotType;
 
     public bool IsExit => spotType != 0;
-    public bool IsEnterance => spotType != 1;
+    public bool IsEntrance => spotType != 1;
 
     public override IEnumerable<Gizmo> GetGizmos()
     {

@@ -21,7 +21,7 @@ public static class EnterMapUtilityVehicles_FindNearEdgeCell
 
     public static void Prefix(ref Predicate<IntVec3> extraCellValidator, Map map)
     {
-        if (!EnterHereMod.instance.EnterHereSettings.Colonists)
+        if (!EnterHereMod.Instance.EnterHereSettings.Colonists)
         {
             return;
         }
