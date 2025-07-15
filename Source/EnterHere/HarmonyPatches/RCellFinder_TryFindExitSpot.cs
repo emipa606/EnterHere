@@ -10,7 +10,7 @@ namespace EnterHere;
 [HarmonyPatch]
 public static class RCellFinder_TryFindExitSpot
 {
-    private static IEnumerable<MethodBase> TargetMethods()
+    public static IEnumerable<MethodBase> TargetMethods()
     {
         yield return typeof(RCellFinder).GetMethod(nameof(RCellFinder.TryFindBestExitSpot));
         yield return typeof(RCellFinder).GetMethod(nameof(RCellFinder.TryFindRandomExitSpot));

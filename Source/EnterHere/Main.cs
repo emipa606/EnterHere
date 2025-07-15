@@ -41,15 +41,23 @@ public static class Main
         new Harmony("Mlie.EnterHere").PatchAll(Assembly.GetExecutingAssembly());
     }
 
+    private static List<Building> FindAllEnterSpots(Map map)
+    {
+        var list = map?.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"));
+        if (list == null || !list.Any())
+        {
+            return null;
+        }
+
+        list = list.Where(building => building is EnterSpot { IsEntrance: true }).ToList();
+        return !list.Any() ? null : list;
+    }
+
     public static IntVec3 FindBestEnterSpot(Map map, IntVec3 startIntVec3)
     {
-        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))?.Where(building =>
-            building is EnterSpot
-            {
-                IsEntrance: true
-            }).ToArray();
+        var list = FindAllEnterSpots(map);
 
-        if (list == null || !list.Any())
+        if (list == null)
         {
             return startIntVec3;
         }
@@ -103,18 +111,28 @@ public static class Main
         return startIntVec3;
     }
 
+    private static List<Building> FindAllExitSpots(Map map)
+    {
+        var list = map?.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"));
+        if (list == null || !list.Any())
+        {
+            return null;
+        }
+
+        list = list.Where(building => building is EnterSpot { IsExit: true }).ToList();
+        return !list.Any() ? null : list;
+    }
 
     public static IntVec3 FindBestExitSpot(Map map)
     {
-        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))
-            ?.Where(building => building is EnterSpot { IsExit: true }).ToArray();
+        var possibleSpots = FindAllExitSpots(map);
 
-        if (list == null || !list.Any())
+        if (possibleSpots == null)
         {
             return IntVec3.Invalid;
         }
 
-        return list.InRandomOrder().Select(spot =>
+        return possibleSpots.InRandomOrder().Select(spot =>
         {
             var currentSpotPosition = spot.Position;
 
@@ -135,7 +153,7 @@ public static class Main
                     return false;
                 }
 
-                return !map.roofGrid.Roofed(edgeCell) && edgeCell.GetDistrict(map).TouchesMapEdge;
+                return !map.roofGrid.Roofed(edgeCell) && edgeCell.GetDistrict(map)?.TouchesMapEdge == true;
             }
         }).FirstOrDefault(cell => cell != IntVec3.Invalid);
     }
@@ -150,10 +168,9 @@ public static class Main
         }
 
         var map = pawn.Map;
-        var list = map.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"))
-            ?.Where(building => building is EnterSpot { IsExit: true }).ToArray();
+        var list = FindAllExitSpots(map);
 
-        if (list == null || !list.Any())
+        if (list == null)
         {
             return IntVec3.Invalid;
         }

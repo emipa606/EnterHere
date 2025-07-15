@@ -9,7 +9,7 @@ namespace EnterHere;
 [HarmonyPatch]
 public static class RaidStrategyWorker_SpawnThreats
 {
-    private static IEnumerable<MethodBase> TargetMethods()
+    public static IEnumerable<MethodBase> TargetMethods()
     {
         yield return AccessTools.Method(typeof(RaidStrategyWorker), nameof(RaidStrategyWorker.SpawnThreats));
 

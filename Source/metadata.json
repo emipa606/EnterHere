@@ -5,6 +5,12 @@
   "PreviewVersion": "1.6",
   "SocialImageSet": true,
   "FundingSet": true,
-  "LastXmlCleaning": "2025-06-28T22:44:04.0017957+02:00",
-  "SearchTags": " orderly entrance."
+  "LastXmlCleaning": "2025-07-15T23:38:28.8337424+02:00",
+  "SearchTags": " orderly entrance.",
+  "Patches": false,
+  "Defs": true,
+  "Assemblies": true,
+  "LinesOfCode": 31364,
+  "LinesOfXML": 1545,
+  "CodeBaseSize": 71
 }

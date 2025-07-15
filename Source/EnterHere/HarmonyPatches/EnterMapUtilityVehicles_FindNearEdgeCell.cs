@@ -9,14 +9,14 @@ namespace EnterHere;
 [HarmonyPatch]
 public static class EnterMapUtilityVehicles_FindNearEdgeCell
 {
-    private static bool Prepare()
+    public static bool Prepare()
     {
         return ModLister.GetActiveModWithIdentifier("SmashPhil.VehicleFramework", true) != null;
     }
 
-    private static IEnumerable<MethodBase> TargetMethods()
+    public static IEnumerable<MethodBase> TargetMethods()
     {
-        yield return AccessTools.Method("Vehicles.EnterMapUtilityVehicles:FindNearEdgeCell");
+        yield return AccessTools.Method("Vehicles.World.EnterMapUtilityVehicles:FindNearEdgeCell");
     }
 
     public static void Prefix(ref Predicate<IntVec3> extraCellValidator, Map map)
