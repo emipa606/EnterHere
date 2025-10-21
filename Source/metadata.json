@@ -5,12 +5,13 @@
   "PreviewVersion": "1.6",
   "SocialImageSet": true,
   "FundingSet": true,
-  "LastXmlCleaning": "2025-07-15T23:38:28.8337424+02:00",
+  "LastXmlCleaning": "2025-10-21T20:23:43.8413519+02:00",
   "SearchTags": " orderly entrance.",
   "Patches": false,
   "Defs": true,
   "Assemblies": true,
-  "LinesOfCode": 31364,
+  "LinesOfCode": 32104,
   "LinesOfXML": 1545,
-  "CodeBaseSize": 71
+  "CodeBaseSize": 71,
+  "RimWorldBaseId": "11470"
 }
