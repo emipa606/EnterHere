@@ -7,4 +7,5 @@
   </Configurations>
   <Project Path="EnterHere/EnterHere.csproj" />
   <Project Path="EnterHere_HospitalityPatch/EnterHere_HospitalityPatch.csproj" />
+  <Project Path="EnterHere_VehiclesPatch/EnterHere_VehiclesPatch.csproj" />
 </Solution>

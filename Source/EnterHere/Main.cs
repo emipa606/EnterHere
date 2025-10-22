@@ -21,7 +21,8 @@ public static class Main
 
     public static readonly Texture2D EnterAndExitTexture2D = ContentFinder<Texture2D>.Get("UI/EnterAndExit");
 
-    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache = new();
+    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache =
+        new Dictionary<Pawn, Tuple<int, IntVec3>>();
 
     static Main()
     {
@@ -33,15 +34,13 @@ public static class Main
             if (foundType != null)
             {
                 Targets.Add(foundType);
-
-                Log.Message("[EnterHere]: Hospitality loaded, patching its IncidentWorker_VisitorGroup.");
             }
         }
 
         new Harmony("Mlie.EnterHere").PatchAll(Assembly.GetExecutingAssembly());
     }
 
-    private static List<Building> FindAllEnterSpots(Map map)
+    public static List<Building> FindAllEnterSpots(Map map)
     {
         var list = map?.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"));
         if (list == null || !list.Any())
@@ -53,7 +52,7 @@ public static class Main
         return !list.Any() ? null : list;
     }
 
-    public static IntVec3 FindBestEnterSpot(Map map, IntVec3 startIntVec3)
+    public static IntVec3 FindBestEnterSpot(Map map, IntVec3 startIntVec3, Predicate<IntVec3> extraValidator = null)
     {
         var list = FindAllEnterSpots(map);
 
@@ -66,7 +65,7 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
-            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, cellValidator,
+            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, combinedValidator,
                     out var resultIntVec3))
             {
                 return resultIntVec3;
@@ -74,35 +73,14 @@ public static class Main
 
             continue;
 
-            bool cellValidator(IntVec3 edgeCell)
+            bool combinedValidator(IntVec3 c)
             {
-                if (!edgeCell.Standable(map))
+                if (!CellValidator(c, map, currentSpotPosition))
                 {
                     return false;
                 }
 
-                if (map.roofGrid.Roofed(edgeCell))
-                {
-                    return false;
-                }
-
-                if (!map.reachability.CanReachColony(edgeCell))
-                {
-                    return false;
-                }
-
-                if (!map.reachability.CanReach(edgeCell, currentSpotPosition, PathEndMode.OnCell,
-                        TraverseParms.For(TraverseMode.PassDoors)))
-                {
-                    return false;
-                }
-
-                if (!edgeCell.GetDistrict(map).TouchesMapEdge)
-                {
-                    return false;
-                }
-
-                return !edgeCell.Fogged(map);
+                return extraValidator == null || extraValidator(c);
             }
         }
 
@@ -111,7 +89,38 @@ public static class Main
         return startIntVec3;
     }
 
-    private static List<Building> FindAllExitSpots(Map map)
+    public static bool CellValidator(IntVec3 edgeCell, Map map, IntVec3 currentSpotPosition)
+    {
+        if (!edgeCell.Standable(map))
+        {
+            return false;
+        }
+
+        if (map.roofGrid.Roofed(edgeCell))
+        {
+            return false;
+        }
+
+        if (!map.reachability.CanReachColony(edgeCell))
+        {
+            return false;
+        }
+
+        if (!map.reachability.CanReach(edgeCell, currentSpotPosition, PathEndMode.OnCell,
+                TraverseParms.For(TraverseMode.PassDoors)))
+        {
+            return false;
+        }
+
+        if (!edgeCell.GetDistrict(map).TouchesMapEdge)
+        {
+            return false;
+        }
+
+        return !edgeCell.Fogged(map);
+    }
+
+    public static List<Building> FindAllExitSpots(Map map)
     {
         var list = map?.listerBuildings.AllBuildingsColonistOfDef(ThingDef.Named("EnterHereSpot"));
         if (list == null || !list.Any())
@@ -121,41 +130,6 @@ public static class Main
 
         list = list.Where(building => building is EnterSpot { IsExit: true }).ToList();
         return !list.Any() ? null : list;
-    }
-
-    public static IntVec3 FindBestExitSpot(Map map)
-    {
-        var possibleSpots = FindAllExitSpots(map);
-
-        if (possibleSpots == null)
-        {
-            return IntVec3.Invalid;
-        }
-
-        return possibleSpots.InRandomOrder().Select(spot =>
-        {
-            var currentSpotPosition = spot.Position;
-
-            return CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, cellValidator,
-                out var resultIntVec3)
-                ? resultIntVec3
-                : IntVec3.Invalid;
-
-            bool cellValidator(IntVec3 edgeCell)
-            {
-                if (!edgeCell.Standable(map))
-                {
-                    return false;
-                }
-
-                if (edgeCell.Fogged(map))
-                {
-                    return false;
-                }
-
-                return !map.roofGrid.Roofed(edgeCell) && edgeCell.GetDistrict(map)?.TouchesMapEdge == true;
-            }
-        }).FirstOrDefault(cell => cell != IntVec3.Invalid);
     }
 
     public static IntVec3 FindBestExitSpot(Pawn pawn, TraverseMode mode, bool guests = false)
@@ -184,9 +158,6 @@ public static class Main
             {
                 return IntVec3.Invalid;
             }
-
-            Log.Message(
-                $"[EnterHere]: Hospitality guests, will use nearest colonist for pathfinding. ({alternatePawn})");
         }
 
         foreach (var spot in list.InRandomOrder())

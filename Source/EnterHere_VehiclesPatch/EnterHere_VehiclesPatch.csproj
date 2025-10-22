@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputPath>..\..\Hospitality\1.6\Assemblies</OutputPath>
+    <OutputPath>..\..\Vehicles\1.6\Assemblies</OutputPath>
     <TargetFramework>net481</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -19,8 +19,8 @@
       <Version>*</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    <Reference Include="Hospitality">
-      <HintPath>..\..\..\..\..\..\workshop\content\294100\3509486825\1.6\Assemblies\Hospitality.dll</HintPath>
+    <Reference Include="Vehicles">
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\3014915404\1.6\Assemblies\Vehicles.dll</HintPath>
       <CopyLocal>False</CopyLocal>
       <Private>false</Private>
     </Reference>

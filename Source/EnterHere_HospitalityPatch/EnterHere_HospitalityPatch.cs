@@ -10,5 +10,6 @@ public class EnterHere_HospitalityPatch
     static EnterHere_HospitalityPatch()
     {
         new Harmony("Mlie.EnterHere_HospitalityPatch").PatchAll(Assembly.GetExecutingAssembly());
+        Log.Message("[EnterHere]: Added compatibility with Hospitality");
     }
 }
