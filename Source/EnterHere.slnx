@@ -8,4 +8,13 @@
   <Project Path="EnterHere/EnterHere.csproj" />
   <Project Path="EnterHere_HospitalityPatch/EnterHere_HospitalityPatch.csproj" />
   <Project Path="EnterHere_VehiclesPatch/EnterHere_VehiclesPatch.csproj" />
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Mod_Settings.xml" />
+  </Folder>
+  <Folder Name="/XML/1.6/Defs/ThingDefs_Buildings/">
+    <File Path="../1.6/Defs/ThingDefs_Buildings/Buildings_Misc_Enter.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
 </Solution>

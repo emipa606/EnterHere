@@ -1,5 +1,8 @@
 # Changelog for EnterHere
 
+1.6.4 - Should now check 5 tiles around the edge for a valid enter spot
+
+
 1.6.3 - Fixed compatibility with Vehicle Framework
 
 

@@ -21,8 +21,7 @@ public static class Main
 
     public static readonly Texture2D EnterAndExitTexture2D = ContentFinder<Texture2D>.Get("UI/EnterAndExit");
 
-    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache =
-        new Dictionary<Pawn, Tuple<int, IntVec3>>();
+    private static readonly Dictionary<Pawn, Tuple<int, IntVec3>> ExitSpotCache = new();
 
     static Main()
     {
@@ -65,10 +64,13 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
-            if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, combinedValidator,
-                    out var resultIntVec3))
+            for (var i = 0; i < 5; i++)
             {
-                return resultIntVec3;
+                if (CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f + i, map, combinedValidator,
+                        out var resultIntVec3))
+                {
+                    return resultIntVec3;
+                }
             }
 
             continue;
@@ -164,14 +166,17 @@ public static class Main
         {
             var currentSpotPosition = spot.Position;
 
-            if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f, map, cellValidator,
-                    out var resultIntVec3))
+            for (var i = 0; i < 5; i++)
             {
-                continue;
-            }
+                if (!CellFinder.TryFindRandomEdgeCellNearWith(currentSpotPosition, 10f + i, map, cellValidator,
+                        out var resultIntVec3))
+                {
+                    continue;
+                }
 
-            ExitSpotCache[pawn] = new Tuple<int, IntVec3>(GenTicks.TicksGame, resultIntVec3);
-            return resultIntVec3;
+                ExitSpotCache[pawn] = new Tuple<int, IntVec3>(GenTicks.TicksGame, resultIntVec3);
+                return resultIntVec3;
+            }
         }
 
         Log.Message(

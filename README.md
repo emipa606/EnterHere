@@ -1,6 +1,6 @@
 # [Enter Here](https://steamcommunity.com/sharedfiles/filedetails/?id=2824117092)
 
-![Image](https://i.postimg.cc/PJc4kLbg/Self-Info.png)
+![Image](https://img.litet.net/logos/Self-Info.png)
 
 Makes visitors and caravans enter your map in an orderly fashion. 
 
@@ -21,13 +21,13 @@ Optionally you can turn on this for raids (friendly and hostile) as well, just d
 
 Idea by: annabell lee
 
-![Image](https://i.postimg.cc/nr5ktsY8/Self-Support-And-Donations.png)
+![Image](https://img.litet.net/logos/Self-SupportAndDonations.png)
 
 Since modding is just a hobby for me I expect no donations to keep modding. If you still want to show your support you can gift me anything from my [Wishlist](https://store.steampowered.com/wishlist/id/Mlie) or buy me a cup of tea.
 
-[![Image](https://i.postimg.cc/4yn5MvtR/Kofi-Small.png)](https://ko-fi.com/G2G55DDYD)
+[![Image](https://img.litet.net/logos/Kofi-Small.png)](https://ko-fi.com/G2G55DDYD)
 
-![Image](https://i.postimg.cc/cC6mj7Y4/Self-Reporting-Issues.png)
+![Image](https://img.litet.net/logos/Self-ReportingIssues.png)
 
 
 
@@ -41,4 +41,4 @@ Since modding is just a hobby for me I expect no donations to keep modding. If y
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/EnterHere?label=latest%20version&style=plastic&labelColor=0070cd&color=white)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2824117092) | tags:  orderly entrance.
+[![Image](https://img.shields.io/github/v/release/emipa606/EnterHere?label=latest%20version&style=plastic&labelColor=0070cd&color=white)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2824117092) | tags: orderly entrance.
